@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Relógio Digital</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: 50px;
+    }
+    #clock {
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="clock">00:00:00</div>
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    setInterval(updateClock, 1000); // Atualiza a cada 1 segundo
+    updateClock(); // Chama a função logo de cara para mostrar o tempo imediatamente
+  </script>
+</body>
+</html>
