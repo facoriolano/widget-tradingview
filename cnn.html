@@ -11,25 +11,37 @@
       font-family: Arial, sans-serif;
       overflow: hidden;
     }
+    #ticker-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100px;
+      overflow: hidden;
+    }
     #ticker {
-      position: absolute;
+      display: inline-block;
       white-space: nowrap;
-      animation: scroll 30s linear infinite;
+      position: absolute;
+      will-change: transform;
+      animation: scroll 60s linear infinite;
     }
     @keyframes scroll {
-      0% { left: 100%; }
-      100% { left: -100%; }
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
   </style>
 </head>
 <body>
-  <div id="ticker">Carregando notícias...</div>
+  <div id="ticker-wrapper">
+    <div id="ticker">Carregando notícias...</div>
+  </div>
   <script>
     async function fetchRSS() {
       const response = await fetch("https://api.rss2json.com/v1/api.json?rss_url=http://rss.cnn.com/rss/edition.rss");
       const data = await response.json();
       const items = data.items.slice(0, 30).map(item => item.title);
-      document.getElementById('ticker').textContent = items.join(" ⚫ ");
+      const spacer = ' '.repeat(20); // espaço entre fim e reinício
+      const repeatedNews = [...items, spacer, ...items]; // repetir as notícias
+      document.getElementById('ticker').textContent = repeatedNews.join(" - ");
     }
 
     fetchRSS();
