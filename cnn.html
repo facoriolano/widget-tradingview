@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CNN News Ticker</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    #ticker {
+      position: absolute;
+      white-space: nowrap;
+      animation: scroll 30s linear infinite;
+    }
+    @keyframes scroll {
+      0% { left: 100%; }
+      100% { left: -100%; }
+    }
+  </style>
+</head>
+<body>
+  <div id="ticker">Carregando notícias...</div>
+  <script>
+    async function fetchRSS() {
+      const response = await fetch("https://api.rss2json.com/v1/api.json?rss_url=http://rss.cnn.com/rss/edition.rss");
+      const data = await response.json();
+      const items = data.items.slice(0, 10).map(item => item.title);
+      document.getElementById('ticker').textContent = items.join(" ⚫ ");
+    }
+
+    fetchRSS();
+    setInterval(fetchRSS, 300000); // Atualiza a cada 5 minutos
+  </script>
+</body>
+</html>
