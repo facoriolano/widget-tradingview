@@ -13,7 +13,7 @@
     }
     #ticker-wrapper {
       position: relative;
-      width: 100%;
+      width: 100vw;
       height: 50px;
       overflow: hidden;
     }
@@ -22,10 +22,10 @@
       white-space: nowrap;
       position: absolute;
       will-change: transform;
-      animation: scroll 60s linear infinite;
+      animation: scroll 120s linear infinite;
     }
     @keyframes scroll {
-      0% { transform: translateX(100%); }
+      0% { transform: translateX(100vw); }
       100% { transform: translateX(-100%); }
     }
   </style>
@@ -41,7 +41,7 @@
         const data = await response.json();
         const items = data.items.slice(0, 30).map(item => item.title);
         const spacer = ' '.repeat(20); // 20 espaços
-        const newsText = items.join(" - ") + spacer + items.join(" - "); // repete o conteúdo
+        const newsText = items.join(" - ") + spacer + items.join(" - ");
         document.getElementById('ticker').textContent = newsText;
       } catch (e) {
         document.getElementById('ticker').textContent = "Erro ao carregar notícias da CNN.";
