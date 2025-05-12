@@ -14,7 +14,7 @@
     #ticker-wrapper {
       position: relative;
       width: 100%;
-      height: 100px;
+      height: 50px;
       overflow: hidden;
     }
     #ticker {
@@ -36,12 +36,17 @@
   </div>
   <script>
     async function fetchRSS() {
-      const response = await fetch("https://api.rss2json.com/v1/api.json?rss_url=http://rss.cnn.com/rss/edition.rss");
-      const data = await response.json();
-      const items = data.items.slice(0, 30).map(item => item.title);
-      const spacer = ' '.repeat(20); // espaço entre fim e reinício
-      const repeatedNews = [...items, spacer, ...items]; // repetir as notícias
-      document.getElementById('ticker').textContent = repeatedNews.join(" - ");
+      try {
+        const response = await fetch("https://api.rss2json.com/v1/api.json?rss_url=http://rss.cnn.com/rss/edition.rss");
+        const data = await response.json();
+        const items = data.items.slice(0, 30).map(item => item.title);
+        const spacer = ' '.repeat(20); // 20 espaços
+        const newsText = items.join(" - ") + spacer + items.join(" - "); // repete o conteúdo
+        document.getElementById('ticker').textContent = newsText;
+      } catch (e) {
+        document.getElementById('ticker').textContent = "Erro ao carregar notícias da CNN.";
+        console.error("Falha ao buscar o feed RSS:", e);
+      }
     }
 
     fetchRSS();
