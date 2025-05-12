@@ -37,7 +37,7 @@
   <script>
     async function fetchRSS() {
       try {
-        const response = await fetch("https://api.rss2json.com/v1/api.json?rss_url=http://rss.cnn.com/rss/edition.rss");
+        const response = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.cnbc.com/id/100003114/device/rss/rss.html"); // CNBC 
         const data = await response.json();
         const items = data.items.slice(0, 30).map(item => item.title);
         const spacer = ' '.repeat(20); // 20 espaços
