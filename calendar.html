@@ -7,23 +7,30 @@
   <style>
     body {
       margin: 0;
-      background-color: #1e1e1e; /* fundo cinza escuro */
-      overflow: hidden;
-    }
-    iframe {
-      border: none;
-      width: 100vw;
+      background-color: #1e1e1e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
+    }
+    .frame-container {
+      box-shadow: 0 0 20px #000;
+      border-radius: 8px;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
-  <iframe 
-    src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=110,17,29,25,32,6,37,26,5,22,39,14,48,10,35,7,43,38,4,36,12,72&calType=week&timeZone=12&lang=12" 
-    frameborder="0" 
-    allowtransparency="true" 
-    marginwidth="0" 
-    marginheight="0">
-  </iframe>
+  <div class="frame-container">
+    <iframe 
+      src="https://sslecal2.investing.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=110,17,29,25,32,6,37,26,5,22,39,14,48,10,35,7,43,38,4,36,12,72&calType=week&timeZone=12&lang=12" 
+      width="650" 
+      height="467" 
+      frameborder="0" 
+      allowtransparency="true" 
+      marginwidth="0" 
+      marginheight="0">
+    </iframe>
+  </div>
 </body>
 </html>
