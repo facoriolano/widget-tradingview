@@ -54,6 +54,7 @@
   <br />
   <button onclick="copiarLista()">📋 Copiar para WhatsApp</button>
   <button onclick="exportarCSV()">⬇️ Exportar CSV</button>
+  <button onclick="limparLista()">🗑️ Limpar Lista</button>
 
   <script>
     const output = document.getElementById("output");
@@ -64,10 +65,18 @@
     }
 
     function atualizarLista() {
-      let lista = '';
-      for (const [nome, dataHora] of alunos.entries()) {
-        lista += `${nome} - ${dataHora}\n`;
+      if (alunos.size === 0) {
+        output.value = '';
+        return;
       }
+
+      const dataHoraChamada = [...alunos.values()][0];
+      let lista = `📅 Data da chamada: ${dataHoraChamada}\n\n✅ Presentes:\n`;
+
+      for (const nome of alunos.keys()) {
+        lista += `${nome}\n`;
+      }
+
       output.value = lista;
     }
 
@@ -89,6 +98,11 @@
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    }
+
+    function limparLista() {
+      alunos.clear();
+      atualizarLista();
     }
 
     const qrCodeSuccessCallback = (decodedText, decodedResult) => {
