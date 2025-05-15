@@ -1,107 +1,91 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.3">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leitor de QR Code - Chamada</title>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f8f9fa;
+    }
+    h1 {
+      text-align: center;
+    }
+    #reader {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="pt-BR"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Leitor de QR Code - Chamada&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://unpkg.com/html5-qrcode" type="text/javascript"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: Arial, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #f8f9fa;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>h1 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>#reader {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 400px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>textarea {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 200px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 10px 15px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 5px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;Chamada - Leitor de QR Code&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="reader"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;h2&gt;Presentes:&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;textarea id="output" readonly&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;br /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;button onclick="copiarLista()"&gt;📋 Copiar para WhatsApp&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;button onclick="exportarCSV()"&gt;⬇️ Exportar CSV&lt;/button&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const output = document.getElementById("output");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const alunos = new Set();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function extrairNomeCompleto(texto) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>return texto.replace(/Crisma Juvenil/i, '').trim();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function atualizarLista() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>output.value = Array.from(alunos).join("\n");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function copiarLista() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>output.select();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.execCommand("copy");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>alert("Lista copiada para colar no WhatsApp!");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function exportarCSV() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const csvContent = "data:text/csv;charset=utf-8," + Array.from(alunos).join("\n");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const encodedUri = encodeURI(csvContent);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const link = document.createElement("a");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>link.setAttribute("href", encodedUri);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>link.setAttribute("download", "chamada_qr.csv");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.body.appendChild(link);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>link.click();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.body.removeChild(link);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const qrCodeSuccessCallback = (decodedText, decodedResult) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const nome = extrairNomeCompleto(decodedText);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!alunos.has(nome)) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>alunos.add(nome);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>atualizarLista();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const html5QrcodeScanner = new Html5QrcodeScanner(</p>
-<p class="p1"><span class="Apple-converted-space">      </span>"reader",</p>
-<p class="p1"><span class="Apple-converted-space">      </span>{ fps: 10, qrbox: 250 },</p>
-<p class="p1"><span class="Apple-converted-space">      </span>false</p>
-<p class="p1"><span class="Apple-converted-space">    </span>);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>html5QrcodeScanner.render(qrCodeSuccessCallback);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+  <h1>Chamada - Leitor de QR Code</h1>
+  <div id="reader"></div>
+  <h2>Presentes:</h2>
+  <textarea id="output" readonly></textarea>
+  <br />
+  <button onclick="copiarLista()">📋 Copiar para WhatsApp</button>
+  <button onclick="exportarCSV()">⬇️ Exportar CSV</button>
+
+  <script>
+    const output = document.getElementById("output");
+    const alunos = new Set();
+
+    function extrairNomeCompleto(texto) {
+      return texto.replace(/Crisma Juvenil/i, '').trim();
+    }
+
+    function atualizarLista() {
+      output.value = Array.from(alunos).join("\n");
+    }
+
+    function copiarLista() {
+      output.select();
+      document.execCommand("copy");
+      alert("Lista copiada para colar no WhatsApp!");
+    }
+
+    function exportarCSV() {
+      const csvContent = "data:text/csv;charset=utf-8," + Array.from(alunos).join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "chamada_qr.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+      const nome = extrairNomeCompleto(decodedText);
+      if (!alunos.has(nome)) {
+        alunos.add(nome);
+        atualizarLista();
+      }
+    };
+
+    const html5QrcodeScanner = new Html5QrcodeScanner(
+      "reader",
+      { fps: 10, qrbox: 250 },
+      false
+    );
+    html5QrcodeScanner.render(qrCodeSuccessCallback);
+  </script>
 </body>
 </html>
