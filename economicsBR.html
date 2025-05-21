@@ -1,90 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard Econômico Brasil - Gráficos TradingView</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-    }
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 10px;
-      padding: 10px;
-    }
-    .widget {
-      height: 320px;
-      border: 1px solid #222;
-      border-radius: 5px;
-      background-color: #111;
-      position: relative;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mini Gráficos Econômicos Brasil</title>
+<style>
+  body {
+    margin: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+    padding: 10px;
+  }
+  .widget {
+    min-height: 220px;
+    border: 1px solid #222;
+    border-radius: 6px;
+    background-color: #111;
+  }
+</style>
 </head>
 <body>
 
-  <!-- Ticker Widget -->
-  <div class="tradingview-widget-container">
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-      {
-        "symbols": [
-          {"proName": "BRCPI", "title": "Inflação (IPCA)"},
-          {"proName": "BRM2", "title": "Massa Monetária (M2)"},
-          {"proName": "BRJUROS", "title": "Taxa de Juros SELIC"},
-          {"proName": "BRDESEMP", "title": "Desemprego"}
-        ],
-        "showSymbolLogo": true,
-        "colorTheme": "dark",
-        "isTransparent": false,
-        "displayMode": "adaptive",
-        "locale": "pt"
-      }
-    </script>
+  <div class="grid-container" id="mini-charts-container">
   </div>
 
-  <!-- Grid de Gráficos -->
-  <div class="grid-container">
-    <div id="chart_brcpi" class="widget"></div>
-    <div id="chart_brm2" class="widget"></div>
-    <div id="chart_brjuros" class="widget"></div>
-    <div id="chart_brdesemp" class="widget"></div>
-  </div>
+<script>
+  const symbols = [
+    { symbol: "BRCPI", title: "Inflação (IPCA)" },
+    { symbol: "BRM2", title: "Massa Monetária (M2)" },
+    { symbol: "BRJUROS", title: "Taxa de Juros SELIC" },
+    { symbol: "BRDESEMP", title: "Desemprego" }
+  ];
 
-  <!-- Script TradingView -->
-  <script src="https://s3.tradingview.com/tv.js"></script>
-  <script>
-    const createChart = (containerId, symbol) => {
-      return new TradingView.widget({
-        container_id: containerId,
-        autosize: true,
-        symbol: symbol,
-        interval: 'D',
-        timezone: 'Etc/UTC',
-        theme: 'dark',
-        style: '1',
-        toolbar_bg: '#222',
-        withdateranges: true,
-        hide_side_toolbar: false,
-        allow_symbol_change: true,
-        details: true,
-        hotlist: true,
-        calendar: true,
-        news: ['headlines'],
-        locale: 'pt'
-      });
-    };
+  const container = document.getElementById("mini-charts-container");
 
-    // Inicializar os gráficos
-    createChart("chart_brcpi", "BRCPI");
-    createChart("chart_brm2", "BRM2");
-    createChart("chart_brjuros", "BRJUROS");
-    createChart("chart_brdesemp", "BRDESEMP");
-  </script>
+  symbols.forEach(({ symbol, title }) => {
+    const widgetDiv = document.createElement("div");
+    widgetDiv.className = "tradingview-widget-container widget";
+
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.async = true;
+
+    // Config JSON para mini gráfico
+    script.innerHTML = JSON.stringify({
+      symbol: symbol,
+      width: "100%",
+      height: "220",
+      locale: "pt",
+      dateRange: "1M",
+      colorTheme: "dark",
+      trendLineColor: "#37a6ef",
+      underLineColor: "rgba(55, 166, 239, 0.15)",
+      isTransparent: false,
+      autosize: true,
+      largeChartUrl: `https://s.tradingview.com/symbols/${symbol}/`
+    });
+
+    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js";
+
+    widgetDiv.appendChild(script);
+    container.appendChild(widgetDiv);
+  });
+</script>
 
 </body>
 </html>
