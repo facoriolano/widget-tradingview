@@ -2,57 +2,35 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>TradingView News Ticker</title>
+  <title>TradingView Ticker Horizontal</title>
   <style>
     body {
       margin: 0;
       background: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-    }
-    #ticker-wrapper {
-      position: relative;
-      width: 100vw;
-      height: 50px;
-      overflow: hidden;
-    }
-    #ticker {
-      display: inline-block;
-      white-space: nowrap;
-      position: absolute;
-      will-change: transform;
-      animation: scroll 160s linear infinite;
-    }
-    @keyframes scroll {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
     }
   </style>
 </head>
 <body>
-  <div id="ticker-wrapper">
-    <div id="ticker">Carregando notícias...</div>
-  </div>
-
-  <script>
-    async function fetchTradingViewFeed() {
-      try {
-        const proxy = "https://api.rss2json.com/v1/api.json?rss_url=https://www.tradingview.com/feed/";
-        const response = await fetch(proxy);
-        const data = await response.json();
-        const headlines = data.items.slice(0, 20).map(item => item.title);
-        const spacer = ' '.repeat(20);
-        const newsText = headlines.join(" ⚫ ") + spacer + headlines.join(" ⚫ ");
-        document.getElementById("ticker").textContent = newsText;
-      } catch (err) {
-        document.getElementById("ticker").textContent = "Erro ao carregar as notícias do TradingView.";
-        console.error(err);
-      }
+  <!-- TradingView Widget BEGIN -->
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+      "symbols": [
+        { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
+        { "proName": "FOREXCOM:NSXUSD", "title": "Nasdaq 100" },
+        { "proName": "BINANCE:BTCUSDT", "title": "Bitcoin" },
+        { "proName": "BINANCE:ETHUSDT", "title": "Ethereum" },
+        { "proName": "TVC:GOLD", "title": "Ouro" },
+        { "proName": "FX_IDC:USDBRL", "title": "Dólar / Real" }
+      ],
+      "colorTheme": "dark",
+      "isTransparent": true,
+      "displayMode": "adaptive",
+      "locale": "br"
     }
-
-    fetchTradingViewFeed();
-    setInterval(fetchTradingViewFeed, 300000); // Atualiza a cada 5 minutos
-  </script>
+    </script>
+  </div>
+  <!-- TradingView Widget END -->
 </body>
 </html>
